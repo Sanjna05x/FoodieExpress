@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - FoodieExpress 🍕</title>
+    
+    <!-- Google Fonts Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        :root {
+            --orange: #ff6b35;
+            --orange-dark: #f7931e;
+            --gradient: linear-gradient(135deg, var(--orange), var(--orange-dark));
+        }
+        
+        body { font-family: 'Poppins', sans-serif; }
+        
+        .navbar { background: var(--gradient); }
+        .btn-orange { background: var(--gradient); border: none; color: white; }
+        .btn-orange:hover { background: linear-gradient(135deg, #e55a2b, #de7a14); transform: translateY(-2px); }
+        
+        .hero-bg { background: var(--gradient); }
+        .offer-banner { background: rgba(255,255,255,0.95); border-left: 5px solid var(--orange); }
+        
+        .food-card { transition: all 0.3s ease; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .food-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(255,107,53,0.3); }
+        
+        .cart-sidebar { 
+            position: fixed; top: 0; right: -500px; width: 380px; height: 100vh; 
+            background: white; box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); z-index: 9999;
+        }
+        .cart-sidebar.show { right: 0; }
+        
+        .cart-item { border-bottom: 1px solid #eee; padding: 15px 0; }
+        .quantity-btn { width: 35px; height: 35px; border-radius: 50%; }
+        
+        @media (max-width: 768px) {
+            .cart-sidebar { width: 100%; right: -100%; }
+            .food-card:hover { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-2 shadow-lg">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="index.html">
+                <i class="fas fa-utensils me-2"></i>FoodieExpress
+            </a>
+            
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">
+                            <i class="fas fa-shopping-cart me-1"></i>Cart
+                            <span id="cartCountBadge" class="badge bg-white ms-1" style="display:none;">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Special Offers Banner -->
+    <div class="offer-banner py-3 px-4 mb-4 shadow-sm">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h4 class="fw-bold mb-1">🎉 Special Offer!</h4>
+                    <p class="mb-0">20% OFF on orders above ₹500 • Use code: <strong>FOODIE20</strong></p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <span class="badge bg-orange fs-6 px-3 py-2">Limited Time</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search & Filter Section -->
+    <div class="container mb-5">
+        <div class="row g-3 mb-4">
+            <!-- Search Bar -->
+            <div class="col-lg-5">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-orange">
+                        <i class="fas fa-search text-orange"></i>
+                    </span>
+                    <input type="text" class="form-control border-orange fs-5 py-3" id="searchInput" 
+                           placeholder="Search for burgers, pizza, drinks...">
+                </div>
+            </div>
+            
+            <!-- Category Filter Buttons -->
+            <div class="col-lg-7">
+                <div class="btn-group w-100" role="group" id="categoryFilters">
+                    <button class="btn btn-outline-orange active" data-category="All" onclick="filterByCategory('All')">
+                        <i class="fas fa-th me-1"></i>All
+                    </button>
+                    <button class="btn btn-outline-orange" data-category="Starters" onclick="filterByCategory('Starters')">
+                        <i class="fas fa-seedling me-1"></i>Starters
+                    </button>
+                    <button class="btn btn-outline-orange" data-category="Main Course" onclick="filterByCategory('Main Course')">
+                        <i class="fas fa-drumstick-bite me-1"></i>Main Course
+                    </button>
+                    <button class="btn btn-outline-orange" data-category="Desserts" onclick="filterByCategory('Desserts')">
+                        <i class="fas fa-ice-cream me-1"></i>Desserts
+                    </button>
+                    <button class="btn btn-outline-orange" data-category="Drinks" onclick="filterByCategory('Drinks')">
+                        <i class="fas fa-mug-hot me-1"></i>Drinks
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="text-center py-5 d-none">
+            <div class="spinner-border text-orange fs-1" style="width: 4rem; height: 4rem;"></div>
+            <h4 class="mt-3 text-muted">Loading delicious menu...</h4>
+        </div>
+
+        <!-- Food Grid -->
+        <div class="row g-4" id="foodGrid">
+            <!-- Food cards populated by JavaScript -->
+        </div>
+
+        <!-- No Results -->
+        <div id="noResults" class="text-center py-5 d-none">
+            <i class="fas fa-search fa-3x text-muted mb-3"></i>
+            <h3 class="text-muted">No food items found</h3>
+            <button class="btn btn-orange px-5" onclick="loadMenuItems()">
+                <i class="fas fa-redo me-2"></i>Try Again
+            </button>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar p-4" id="cartSidebar">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fw-bold mb-0">
+                <i class="fas fa-shopping-cart me-2"></i>My Cart
+            </h3>
+            <button class="btn-close btn-close-white fs-4" onclick="closeCart()"></button>
+        </div>
+        
+        <div id="cartItemsList" class="cart-items mb-4">
+            <!-- Cart items populated here -->
+        </div>
+        
+        <div class="position-sticky bottom-0 bg-white pt-3 border-top">
+            <div class="d-flex justify-content-between mb-3 fs-5 fw-bold">
+                <span>Total:</span>
+                <span id="cartTotal">₹0.00</span>
+            </div>
+            <button class="btn btn-orange w-100 py-3 fs-5 fw-bold" onclick="checkout()">
+                <i class="fas fa-credit-card me-2"></i>Checkout ₹<span id="finalTotal">0</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 d-none" id="cartOverlay" onclick="closeCart()"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

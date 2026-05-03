@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Status - FoodieExpress</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="index.html">
+                <i class="fas fa-utensils me-2"></i>FoodieExpress
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Home</a>
+                    <a class="nav-link" href="menu.html"><i class="fas fa-list me-1"></i>Menu</a>
+                    <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart me-1"></i>Cart</a>
+                    <a class="nav-link active" href="order-status.html"><i class="fas fa-clipboard-list me-1"></i>Orders</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Order Status Section -->
+    <section class="order-status-section py-5 mt-5 bg-light min-vh-75">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-6">
+                    <div class="text-center mb-5">
+                        <i class="fas fa-truck-loading fa-5x text-orange mb-4 animate__animated animate__bounce"></i>
+                        <h1 class="display-5 fw-bold mb-3">Order Status</h1>
+                        <p class="lead text-muted">Track your delicious food delivery in real time</p>
+                    </div>
+
+                    <!-- Order Status Progress Bar -->
+                    <div class="card shadow-lg border-0 mb-5">
+                        <div class="card-header bg-gradient-orange text-white text-center py-4">
+                            <h4 class="mb-1 fw-bold">Order #12345</h4>
+                            <p class="mb-0 opacity-75">Placed 15 minutes ago</p>
+                        </div>
+                        <div class="card-body p-5">
+                            <!-- Progress Steps -->
+                            <div class="order-steps mb-5">
+                                <div class="step-item active mb-4">
+                                    <div class="step-circle">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <div class="step-line"></div>
+                                    <h6 class="fw-bold mt-3 mb-1">Order Placed</h6>
+                                    <small class="text-muted">Just now</small>
+                                </div>
+                                
+                                <div class="step-item mb-4">
+                                    <div class="step-circle">
+                                        <i class="fas fa-fire"></i>
+                                    </div>
+                                    <div class="step-line"></div>
+                                    <h6 class="fw-bold mt-3 mb-1">Preparing</h6>
+                                    <small class="text-muted">2 mins ago</small>
+                                </div>
+                                
+                                <div class="step-item mb-4">
+                                    <div class="step-circle">
+                                        <i class="fas fa-shipping-fast"></i>
+                                    </div>
+                                    <div class="step-line"></div>
+                                    <h6 class="fw-bold mt-3 mb-1">Out for Delivery</h6>
+                                    <small class="text-muted">Ready in 15 mins</small>
+                                </div>
+                                
+                                <div class="step-item">
+                                    <div class="step-circle">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <h6 class="fw-bold mt-3 mb-1">Delivered</h6>
+                                    <small class="text-muted">Arriving soon</small>
+                                </div>
+                            </div>
+
+                            <!-- Order Details -->
+                            <div class="row g-3 mb-4">
+                                <div class="col-6">
+                                    <strong>Delivery Address:</strong><br>
+                                    <small class="text-muted">123 Main Street, Apt 4B<br>Your City 12345</small>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Payment:</strong><br>
+                                    <span class="badge bg-success fs-6 px-3 py-2">Paid ₹450</span>
+                                </div>
+                            </div>
+
+                            <!-- Order Items -->
+                            <h5 class="fw-bold mb-4">Order Items</h5>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item px-0 border-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-2">
+                                            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=100" class="rounded-circle img-fluid" alt="Burger">
+                                        </div>
+                                        <div class="col-6">
+                                            <h6 class="mb-1">Classic Burger</h6>
+                                            <small class="text-muted">Qty: 2</small>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6 class="text-orange">₹179</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item px-0 border-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-2">
+                                            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=100" class="rounded-circle img-fluid" alt="Pizza">
+                                        </div>
+                                        <div class="col-6">
+                                            <h6 class="mb-1">Margherita Pizza</h6>
+                                            <small class="text-muted">Qty: 1</small>
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <h6 class="text-orange">₹129</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light text-center py-4">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <button class="btn btn-outline-orange w-100">
+                                        <i class="fas fa-phone me-2"></i>Call Support
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="menu.html" class="btn btn-orange w-100">
+                                        <i class="fas fa-plus me-2"></i>Order More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
